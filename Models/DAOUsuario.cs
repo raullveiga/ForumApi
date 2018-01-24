@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
+
 namespace ForumApi.Models
 {
     public class DAOUsuario : Conexao

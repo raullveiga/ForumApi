@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 
+
 namespace ForumApi.Models
 {
     public abstract class Conexao

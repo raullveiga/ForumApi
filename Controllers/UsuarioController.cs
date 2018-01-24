@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ForumApi.Models;
@@ -31,8 +32,25 @@ namespace ForumApi.Controllers
 
 
         [HttpPost]
-        public void Adicionar([FromBody] Usuario usuario){
-            dusuario.Cadastro(usuario);
+        public IActionResult Adicionar([FromBody] Usuario usuario){
+            JsonResult rs;
+            try{
+                rs = new JsonResult (dusuario.Cadastro(usuario));
+                rs.ContentType = "aplication/json";
+                if(!Convert.ToBoolean(rs.Value)){
+                    rs.StatusCode = 404;
+                    rs.Value = "Ocorreu um erro";
+                }else{
+                    rs.StatusCode = 200;
+                }
+            }catch(Exception ex){
+                rs = new JsonResult("");
+                rs.StatusCode = 204;
+                rs.ContentType = "aplication/json";
+                rs.Value = ex.Message;
+            }
+
+            return Json(rs);
         }
 
     }
