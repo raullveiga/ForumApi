@@ -35,6 +35,9 @@ namespace ForumApi.Controllers
         public IActionResult Adicionar([FromBody] Usuario usuario){
             JsonResult rs;
             try{
+                if(!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                    
                 rs = new JsonResult (dusuario.Cadastro(usuario));
                 rs.ContentType = "aplication/json";
                 if(!Convert.ToBoolean(rs.Value)){
